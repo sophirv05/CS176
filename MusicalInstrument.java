@@ -1,46 +1,52 @@
-package edu.monmouth.problemSet2;
+package edu.monmouth.problemSet3;
 
-public class MusicalInstrument {	
+public class MusicalInstrument {
 	// Constants for unknown values
-    private static final String UNKNOWNNAME = "UNKNOWNNAME";
-    private static final String UNKNOWNTYPE = "UNKNOWNTYPE";
-    private static final int UNKNOWNKEYSORSTRINGS = -1;
-    private static final int MINKEYS = 0;
-    private static final int MAXKEYS = 100;
+    private final String UNKNOWNNAME = "UNKNOWNNAME";
+    private final String UNKNOWNTYPE = "UNKNOWNTYPE";
+    private final int UNKNOWNKEYSORSTRINGS = -1;
+    private final int UNKNOWNPRICE= -9;
+    private final int MINKEYS = 0;
+    private final int MAXKEYS = 100;
+    private final int MINPRICE = 0;;
 
     // Instance variables
-    private int numberOfKeysorStrings;
-    private String type;
     private String name;
+    private String type;
+    private int numberOfKeysorStrings;
+    private double price;
 
-	// Default constructor for MusicalInstrument
+	// Default constructor
     public MusicalInstrument() {
-        setNumberOfKeysorStrings(UNKNOWNKEYSORSTRINGS);
-        setType(UNKNOWNTYPE);
         setName(UNKNOWNNAME);
+        setType(UNKNOWNTYPE);
+        setNumberOfKeysorStrings(UNKNOWNKEYSORSTRINGS);
+    }
+        
+    
+    // Constructor 2
+    public MusicalInstrument(String name, String type, int numberOfKeysorStrings) {
+    	this.name = name.toLowerCase(); 
+        this.type = type.toLowerCase();
+        setName(name);
+    	setType(type);
+    	setNumberOfKeysorStrings(numberOfKeysorStrings);
     }
     
-    // Constructor for MusicalInstrument
-    public MusicalInstrument(int numberOfKeysorStrings, String type, String name) {
-    	setNumberOfKeysorStrings(numberOfKeysorStrings);
+    // Constructor 3
+    public MusicalInstrument(String name, String type, int numberOfKeysorStrings, double price) {
+        this.name = name.toLowerCase();
+        this.type = type.toLowerCase();
+        setName(name);
     	setType(type);
-    	setName(name);
+    	setNumberOfKeysorStrings(numberOfKeysorStrings);
+    	setPrice(price);
     }
-		
-	// Mutator for setNumberOfKeysorStrings
-	public void setNumberOfKeysorStrings(int numberOfKeysorStrings) {
-		if(numberOfKeysorStrings >= MINKEYS && numberOfKeysorStrings <= MAXKEYS) {
-			this.numberOfKeysorStrings = numberOfKeysorStrings;
-		} else {
-			this.numberOfKeysorStrings = UNKNOWNKEYSORSTRINGS;
-		}
-	}
-	
 	
 	// Mutator for setName
 	public void setName(String name) {
 		if (name != null && !name.isEmpty()) {
-            this.name = name;
+            this.name = name.toLowerCase();
         } else {
             this.name = UNKNOWNNAME;
         }		
@@ -62,11 +68,30 @@ public class MusicalInstrument {
 				this.type = type;
 			} else {
 				this.type = UNKNOWNTYPE;
+		        this.type = type.toLowerCase();
 			}
 		} else {
             this.type = UNKNOWNTYPE;
         }
     }
+	
+	// Mutator for setNumberOfKeysorStrings
+	public void setNumberOfKeysorStrings(int numberOfKeysorStrings) {
+		if(numberOfKeysorStrings >= MINKEYS && numberOfKeysorStrings <= MAXKEYS) {
+			this.numberOfKeysorStrings = numberOfKeysorStrings;
+		} else {
+			this.numberOfKeysorStrings = UNKNOWNKEYSORSTRINGS;
+		}
+	}
+	
+	// Mutator setPrice
+	public void setPrice(double price) {
+        if (price < MINPRICE) {
+            this.price = UNKNOWNPRICE;
+        } else {
+            this.price = price;
+        }
+	}
 	
 	// Accessor for getNumberOfKeysorStrings
 	public int getNumberOfKeysorStrings() {
@@ -81,5 +106,10 @@ public class MusicalInstrument {
 	// Accessor for getType
 	public String getType() {
 	    return type;
-	}	
+	}
+	
+	// Acccessor for get Price
+	public double getPrice() {
+	    return price;
+	}
 }
