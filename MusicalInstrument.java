@@ -1,4 +1,4 @@
-package edu.monmouth.problemSet3;
+package edu.monmouth.problemSet4;
 
 public class MusicalInstrument {
 	// Constants for unknown values
@@ -21,22 +21,20 @@ public class MusicalInstrument {
         setName(UNKNOWNNAME);
         setType(UNKNOWNTYPE);
         setNumberOfKeysorStrings(UNKNOWNKEYSORSTRINGS);
+        setPrice(UNKNOWNPRICE);
     }
         
-    
+  
     // Constructor 2
     public MusicalInstrument(String name, String type, int numberOfKeysorStrings) {
-    	this.name = name.toLowerCase(); 
-        this.type = type.toLowerCase();
         setName(name);
     	setType(type);
     	setNumberOfKeysorStrings(numberOfKeysorStrings);
+        setPrice(UNKNOWNPRICE);
     }
     
     // Constructor 3
     public MusicalInstrument(String name, String type, int numberOfKeysorStrings, double price) {
-        this.name = name.toLowerCase();
-        this.type = type.toLowerCase();
         setName(name);
     	setType(type);
     	setNumberOfKeysorStrings(numberOfKeysorStrings);
@@ -54,25 +52,16 @@ public class MusicalInstrument {
 	
 	// Mutator for setType
 	public void setType(String type) {
-		if (type != null) {
-			type = type.toLowerCase();
-			if (type.equals("woodwind")) {
-				this.type = type;
-			} else if(type.equals("string")) {
-				this.type = type;
-			} else if(type.equals("brass")) {
-				this.type = type;
-			} else if(type.equals("keyboard")) {
-				this.type = type;
-			} else if(type.equals("percussion")) {
-				this.type = type;
-			} else {
-				this.type = UNKNOWNTYPE;
-		        this.type = type.toLowerCase();
-			}
-		} else {
-            this.type = UNKNOWNTYPE;
-        }
+	    String[] validTypes = {"woodwind", "brass", "string", "percussion", "keyboard"};
+	    type = type.toLowerCase();
+		for (String validType : validTypes) {
+            if (type.equals(validType)) {
+                this.type = type;
+                return;
+            } else {
+            	this.type = UNKNOWNTYPE;
+            }
+		}
     }
 	
 	// Mutator for setNumberOfKeysorStrings
@@ -108,8 +97,18 @@ public class MusicalInstrument {
 	    return type;
 	}
 	
-	// Acccessor for get Price
+	// Accessor for get Price
 	public double getPrice() {
 	    return price;
+	   
 	}
+
+	// toString
+	@Override
+	public String toString() {
+		return "MusicalInstrument [name=" + name + ", type=" + type + ", numberOfKeysorStrings=" + numberOfKeysorStrings
+				+ ", price=" + price + "]";
+	}
+
+	
 }
