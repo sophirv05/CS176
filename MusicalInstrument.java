@@ -1,4 +1,4 @@
-package edu.monmouth.problemSet4;
+package edu.monmouth.musicalInstrument;
 
 public class MusicalInstrument {
 	// Constants for unknown values
@@ -17,7 +17,7 @@ public class MusicalInstrument {
     private double price;
 
 	// Default constructor
-    public MusicalInstrument() {
+    public MusicalInstrument() throws MusicalInstrumentException {
         setName(UNKNOWNNAME);
         setType(UNKNOWNTYPE);
         setNumberOfKeysorStrings(UNKNOWNKEYSORSTRINGS);
@@ -26,7 +26,7 @@ public class MusicalInstrument {
         
   
     // Constructor 2
-    public MusicalInstrument(String name, String type, int numberOfKeysorStrings) {
+    public MusicalInstrument(String name, String type, int numberOfKeysorStrings) throws MusicalInstrumentException {
         setName(name);
     	setType(type);
     	setNumberOfKeysorStrings(numberOfKeysorStrings);
@@ -34,7 +34,7 @@ public class MusicalInstrument {
     }
     
     // Constructor 3
-    public MusicalInstrument(String name, String type, int numberOfKeysorStrings, double price) {
+    public MusicalInstrument(String name, String type, int numberOfKeysorStrings, double price) throws MusicalInstrumentException {
         setName(name);
     	setType(type);
     	setNumberOfKeysorStrings(numberOfKeysorStrings);
@@ -42,16 +42,16 @@ public class MusicalInstrument {
     }
 	
 	// Mutator for setName
-	public void setName(String name) {
+	public void setName(String name) throws MusicalInstrumentException {
 		if (name != null && !name.isEmpty()) {
             this.name = name.toLowerCase();
         } else {
-            this.name = UNKNOWNNAME;
+        	throw new MusicalInstrumentException("Invalid instrument name: " + name);
         }		
 	}
 	
 	// Mutator for setType
-	public void setType(String type) {
+	public void setType(String type) throws MusicalInstrumentException {
 	    String[] validTypes = {"woodwind", "brass", "string", "percussion", "keyboard"};
 	    type = type.toLowerCase();
 		for (String validType : validTypes) {
@@ -62,6 +62,7 @@ public class MusicalInstrument {
             	this.type = UNKNOWNTYPE;
             }
 		}
+    	throw new MusicalInstrumentException("Invalid instrument type: " + type);
     }
 	
 	// Mutator for setNumberOfKeysorStrings
@@ -110,5 +111,4 @@ public class MusicalInstrument {
 				+ ", price=" + price + "]";
 	}
 
-	
 }
